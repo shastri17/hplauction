@@ -10,16 +10,16 @@ import (
 type PlayerHandler struct {
 }
 
-
 type PlayerResp struct {
 	Players []Player `json:"players"`
 }
+
 func (p PlayerHandler) Index(r *http.Request) (interface{}, error) {
 	players := getPlayers()
 	return PlayerResp{players}, nil
 }
 
-func (p PlayerHandler) Create(r *http.Request) (interface{}, error) {
+func (p PlayerHandler) Update(r *http.Request) (interface{}, error) {
 	var body struct {
 		Id            int `json:"id"`
 		BiddingAmount int `json:"bidAmount"`
@@ -27,6 +27,10 @@ func (p PlayerHandler) Create(r *http.Request) (interface{}, error) {
 	}
 	b, _ := ioutil.ReadAll(r.Body)
 	json.Unmarshal(b, &body)
+	isAdmin := r.Context().Value("isAdmin").(bool)
+	if !isAdmin {
+		return nil, z.Error{Code: http.StatusBadRequest, Message: "Permission denied"}
+	}
 	z.DB.Exec("update player set bid_amount=?,team_id=?,is_sold=true where id=?", body.BiddingAmount, body.TeamId, body.Id)
 	var team Team
 	z.DB.Table("team").Where("id=?", body.TeamId).First(&team)
@@ -34,8 +38,9 @@ func (p PlayerHandler) Create(r *http.Request) (interface{}, error) {
 	team.TotalPlayers = team.TotalPlayers + 1
 	team.MaxBidAmount = team.PurseAmount - ((11 - team.TotalPlayers) * 100)
 	z.DB.Table("team").Where("id=?", body.TeamId).Update(&team)
-	players := getPlayers()
-	return PlayerResp{players}, nil
+	var player Player
+	z.DB.Table("player").Where("id=?", body.Id).First(&player)
+	return p, nil
 }
 
 func getPlayers() []Player {

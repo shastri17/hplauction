@@ -1,11 +1,8 @@
 package auction
 
 import (
-	"encoding/json"
 	"github.com/zopnow/z"
-	"io/ioutil"
 	"net/http"
-	"strconv"
 )
 
 type TeamHandler struct {
@@ -16,18 +13,14 @@ type TeamResponse struct {
 }
 
 func (t TeamHandler) Index(r *http.Request) (interface{}, error) {
-	q := r.URL.Query()
-	id := q.Get("id")
-	if id == "" {
-		return nil, z.Error{Code: http.StatusBadRequest, Message: "please send id"}
-	}
+	id := r.Context().Value("id").(int)
 	ret := GetDetails(id)
 	var re TeamResponse
-	re.Teams=ret
+	re.Teams = ret
 	return re, nil
 }
 
-func GetDetails(id string) interface{} {
+func GetDetails(id int) interface{} {
 	var team Team
 	var players []Player
 	z.DB.Table("team").Where("id=?", id).First(&team)
@@ -44,22 +37,4 @@ func GetDetails(id string) interface{} {
 	z.DB.Table("player").Where("team_id=?", id).Find(&players)
 	team.Players = players
 	return team
-}
-
-func (t TeamHandler) Create(r *http.Request) (interface{}, error) {
-	var body struct {
-		Username string `json:"username"`
-		Password string `json:"password"`
-	}
-	b, _ := ioutil.ReadAll(r.Body)
-	json.Unmarshal(b, &body)
-	var team Team
-	z.DB.Table("team").Where("username=? and password=?", body.Username, body.Password).First(&team)
-	if team.Id==0{
-		return nil,z.Error{http.StatusBadRequest,"invalid username or password"}
-	}
-	ret := GetDetails(strconv.Itoa(team.Id))
-	var re TeamResponse
-	re.Teams=ret
-	return re, nil
 }
