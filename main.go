@@ -34,7 +34,7 @@ func init() {
 //}
 func main() {
 	log.Println("Listening on 8000...")
-	log.Fatal(http.ListenAndServe("localhost:8000", HandlerWithMiddleWares()))
+	log.Fatal(http.ListenAndServe(":8000", HandlerWithMiddleWares()))
 }
 
 func HandlerWithMiddleWares() http.Handler {
