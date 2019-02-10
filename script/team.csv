@@ -1,21 +1,10 @@
-Team Name,Team Owner Name,Icon1,icon 2,Team Logo
-Siddapur Super Kings," Akshar Bhat, Pradeep SD & Swanand Hegde","Vinay GK
-",Vishnu Hegde (Gore),
-Yellow Smashers,Rajavardhan & Ajit Kabbe,"Vishwas Hegde 
-",Abhi (Sunday Cricketers),
-Sun Risers,"Timmayya Hegde,Lokesh Hegde & Bharath Shastri","Sudarshan
-",Prasanna (Vegi),
-Royal Strikers,Raghvendra Bhat,"Anand Hegde(Aanu) 
-",Nagaraj Hegde (Mani),
-United Karavali,Prashant Hegde,"Ganesh Hegde (GT)
- ",Shashank (Shanka-Strikers),
-Havyaka Panthers,,"Gourish
-",Brahaspati,
-Team Vasistaa's,"Ravi Hegde, Vijet Bhat & Guru Kanalli","Praveen Hegde(Panne)
-",Mahesh Bhat (Mahi),
-Hosabale Fighters,Jagadeesh Hosabale,"Praveen (Bhoosa)
-",Raghavendra (Brett),
-Kings XI Mysore,PG Bhat & Mahesh Hegde,"Keerthi Bhat
-",Karthik (Sunday Cricketers),
-Team 10,Alok Bhat & Goutam Hegde,"Anand Hegde(Andy)
-",Krishna (OM Boys),
+team1,hplteam1,Siddapur Super Kings," Akshar Bhat, Pradeep SD & Swanand Hegde",Vinay GK,Vishnu Hegde (Gore)
+team2,hplteam2,Yellow Smashers,Rajavardhan & Ajit Kabbe,Vishwas Hegde ,Abhi (Sunday Cricketers)
+team3,hplteam3,Sun Risers,"Timmayya Hegde,Lokesh Hegde & Bharath Shastri",Sudarshan,Prasanna (Vegi)
+team4,hplteam4,Royal Strikers,Raghvendra Bhat,Anand Hegde(Aanu) ,Nagaraj Hegde (Mani)
+team5,hplteam5,United Karavali,Prashant Hegde,Ganesh Hegde (GT),Shashank (Shanka-Strikers)
+team6,hplteam6,Havyaka Panthers,Vinayak Hegde,Gourish,Brahaspati
+team7,hplteam7,Team Vasistaa's,"Ravi Hegde, Vijet Bhat & Guru Kanalli",Praveen Hegde(Panne),Mahesh Bhat (Mahi)
+team8,hplteam8,Hosabale Fighters,Jagadeesh Hosabale,Praveen (Bhoosa),Raghavendra (Brett)
+team9,hplteam9,Kings XI Mysore,PG Bhat & Mahesh Hegde,Keerthi Bhat,Karthik (Sunday Cricketers)
+team10,hplteam10,Havyaka Hwaks,Alok Bhat & Goutam Hegde,Anand Hegde(Andy),Krishna (OM Boys)

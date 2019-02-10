@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9b1949a7-1f8d-4a31-a0da-789a574caf5c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/script/importTeams.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/script/team.csv" beforeDir="false" afterPath="$PROJECT_DIR$/script/team.csv" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -130,7 +130,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/script/team.csv">
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
@@ -144,7 +144,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/script/importTeams.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="90">
@@ -188,6 +188,7 @@
         <option value="$PROJECT_DIR$/main.go" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/script/importTeams.py" />
+        <option value="$PROJECT_DIR$/script/team.csv" />
       </list>
     </option>
   </component>
@@ -442,9 +443,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/script/team.csv">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
@@ -458,6 +456,9 @@
           <caret line="6" column="26" selection-start-line="6" selection-start-column="26" selection-end-line="6" selection-end-column="26" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/script/team.csv">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
   </component>
   <component name="masterDetails">
