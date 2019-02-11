@@ -2,18 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9b1949a7-1f8d-4a31-a0da-789a574caf5c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/db/database.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auction/auth.go" beforeDir="false" afterPath="$PROJECT_DIR$/auction/auth.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/auction/login.go" beforeDir="false" afterPath="$PROJECT_DIR$/auction/login.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auction/player.go" beforeDir="false" afterPath="$PROJECT_DIR$/auction/player.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auction/purse.go" beforeDir="false" afterPath="$PROJECT_DIR$/auction/purse.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auction/struct.go" beforeDir="false" afterPath="$PROJECT_DIR$/auction/struct.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auction/team.go" beforeDir="false" afterPath="$PROJECT_DIR$/auction/team.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hplauction" beforeDir="false" afterPath="$PROJECT_DIR$/hplauction" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/middle/authenticator.go" beforeDir="false" afterPath="$PROJECT_DIR$/middle/authenticator.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/middle/struct.go" beforeDir="false" afterPath="$PROJECT_DIR$/middle/struct.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -54,14 +44,14 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="gitignore" value="18" />
-          <entry key="go" value="6238" />
+          <entry key="go" value="6275" />
           <entry key="py" value="173" />
           <entry key="sql" value="341" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Go" value="6238" />
+          <entry key="Go" value="6275" />
           <entry key="PLAIN_TEXT" value="191" />
           <entry key="SQL" value="341" />
         </counts>
@@ -73,11 +63,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="226">
-              <caret line="45" column="43" selection-start-line="45" selection-start-column="43" selection-end-line="45" selection-end-column="43" />
+            <state relative-caret-position="345">
+              <caret line="23" column="23" lean-forward="true" selection-start-line="23" selection-start-column="23" selection-end-line="23" selection-end-column="23" />
               <folding>
                 <element signature="e#14#159#0" expanded="true" />
               </folding>
@@ -100,8 +90,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/middle/authenticator.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="49" column="9" selection-start-line="49" selection-start-column="9" selection-end-line="49" selection-end-column="9" />
+            <state relative-caret-position="495">
+              <caret line="39" column="9" selection-start-line="39" selection-start-column="9" selection-end-line="39" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -115,11 +105,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/auction/login.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="32" column="22" lean-forward="true" selection-start-line="32" selection-start-column="22" selection-end-line="32" selection-end-column="22" />
+            <state relative-caret-position="375">
+              <caret line="53" column="27" selection-start-line="53" selection-start-column="27" selection-end-line="53" selection-end-column="27" />
               <folding>
                 <element signature="e#17#92#0" expanded="true" />
               </folding>
@@ -207,15 +197,15 @@
         <option value="$PROJECT_DIR$/script/importTeams.py" />
         <option value="$PROJECT_DIR$/script/importPlayers.py" />
         <option value="$PROJECT_DIR$/auction/auth.go" />
-        <option value="$PROJECT_DIR$/auction/login.go" />
         <option value="$PROJECT_DIR$/auction/purse.go" />
         <option value="$PROJECT_DIR$/auction/team.go" />
         <option value="$PROJECT_DIR$/db/database.go" />
         <option value="$PROJECT_DIR$/auction/struct.go" />
-        <option value="$PROJECT_DIR$/middle/authenticator.go" />
         <option value="$PROJECT_DIR$/auction/player.go" />
         <option value="$PROJECT_DIR$/middle/struct.go" />
         <option value="$PROJECT_DIR$/main.go" />
+        <option value="$PROJECT_DIR$/middle/authenticator.go" />
+        <option value="$PROJECT_DIR$/auction/login.go" />
       </list>
     </option>
   </component>
@@ -248,16 +238,6 @@
               <item name="hplauction" type="b2602c69:ProjectViewProjectNode" />
               <item name="hplauction" type="462c0819:PsiDirectoryNode" />
               <item name="auction" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="hplauction" type="b2602c69:ProjectViewProjectNode" />
-              <item name="hplauction" type="462c0819:PsiDirectoryNode" />
-              <item name="db" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="hplauction" type="b2602c69:ProjectViewProjectNode" />
-              <item name="hplauction" type="462c0819:PsiDirectoryNode" />
-              <item name="middle" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -312,7 +292,7 @@
     <frame x="55" y="-4" width="1311" height="772" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4984472" visible="true" weight="0.26640317" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4984472" visible="true" weight="0.26640317" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" sideWeight="0.5015528" side_tool="true" weight="0.24980237" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -324,7 +304,7 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info anchor="bottom" id="Terminal" order="9" visible="true" weight="0.26242235" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.26242235" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -348,12 +328,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/middle/authenticator.go</url>
-          <line>61</line>
+          <line>54</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/auction/login.go</url>
-          <line>12</line>
+          <line>14</line>
           <option name="timeStamp" value="8" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
@@ -485,16 +465,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/auction/login.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="32" column="22" lean-forward="true" selection-start-line="32" selection-start-column="22" selection-end-line="32" selection-end-column="22" />
-          <folding>
-            <element signature="e#17#92#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/auction/purse.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
@@ -531,17 +501,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/middle/authenticator.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="49" column="9" selection-start-line="49" selection-start-column="9" selection-end-line="49" selection-end-column="9" />
+        <state relative-caret-position="495">
+          <caret line="39" column="9" selection-start-line="39" selection-start-column="9" selection-end-line="39" selection-end-column="9" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="45" column="43" selection-start-line="45" selection-start-column="43" selection-end-line="45" selection-end-column="43" />
+        <state relative-caret-position="345">
+          <caret line="23" column="23" lean-forward="true" selection-start-line="23" selection-start-column="23" selection-end-line="23" selection-end-column="23" />
           <folding>
             <element signature="e#14#159#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/auction/login.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="53" column="27" selection-start-line="53" selection-start-column="27" selection-end-line="53" selection-end-column="27" />
+          <folding>
+            <element signature="e#17#92#0" expanded="true" />
           </folding>
         </state>
       </provider>

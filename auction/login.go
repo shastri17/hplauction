@@ -1,7 +1,9 @@
 package auction
 
 import (
+	"crypto/sha1"
 	"encoding/json"
+	"fmt"
 	"github.com/hplauction/db"
 	"io/ioutil"
 	"net/http"
@@ -46,5 +48,9 @@ func (l LoginHandler) Create(r *http.Request) interface{} {
 
 func createToken(team Team) string {
 	token := team.Username + team.Password
+	h := sha1.New()
+	h.Write([]byte(token))
+	b := h.Sum(nil)
+	token = fmt.Sprintf("%x", b)
 	return token
 }

@@ -10,21 +10,16 @@ import (
 
 func Authenticator(hand http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		// Set CORS Headers
 		w.Header().Set("Access-Control-Allow-Origin", "*")
 		w.Header().Set("Access-Control-Allow-Headers", "Authorization, Content-Type, x-requested-with, origin, X-API-VERSION")
 		w.Header().Set("Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, OPTIONS")
 		w.Header().Set("Content-Type", "application/json")
-
-		// OK for all pre-flight requests
 		if r.Method == "OPTIONS" {
 			w.WriteHeader(http.StatusOK)
 			return
 		}
-
 		urlParts := strings.Split(r.URL.Path, "/")
 		apiName := urlParts[1]
-
 		if r.Method == "POST" || apiName == "login" {
 			res := auction.LoginHandler{}.Create(r)
 			json.NewEncoder(w).Encode(res)
@@ -36,7 +31,6 @@ func Authenticator(hand http.Handler) http.Handler {
 			json.NewEncoder(w).Encode(response)
 			return
 		}
-
 		ok, ctx := isAuth(r)
 		if !ok {
 			w.WriteHeader(401)
@@ -44,7 +38,6 @@ func Authenticator(hand http.Handler) http.Handler {
 			json.NewEncoder(w).Encode(response)
 			return
 		}
-
 		if ctx != nil {
 			*r = *r.WithContext(ctx)
 		}
