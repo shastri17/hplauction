@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-func Authenticator(inner http.Handler) http.Handler {
+func Authenticator(hand http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		// Set CORS Headers
 		w.Header().Set("Access-Control-Allow-Origin", "*")
@@ -26,11 +26,7 @@ func Authenticator(inner http.Handler) http.Handler {
 		apiName := urlParts[1]
 
 		if r.Method == "POST" || apiName == "login" {
-			res, err := auction.LoginHandler{}.Create(r)
-			if err != nil {
-				json.NewEncoder(w).Encode(err)
-				return
-			}
+			res := auction.LoginHandler{}.Create(r)
 			json.NewEncoder(w).Encode(res)
 			return
 		}
@@ -41,7 +37,7 @@ func Authenticator(inner http.Handler) http.Handler {
 			return
 		}
 
-		ok, ctx := authorised(r)
+		ok, ctx := isAuth(r)
 		if !ok {
 			w.WriteHeader(401)
 			response := Response{401, "ERROR", "Not Authorised", nil}
@@ -51,10 +47,9 @@ func Authenticator(inner http.Handler) http.Handler {
 
 		if ctx != nil {
 			*r = *r.WithContext(ctx)
-			inner.ServeHTTP(w, r)
-		} else {
-			inner.ServeHTTP(w, r)
 		}
+		hand.ServeHTTP(w, r)
+
 	})
 }
 
@@ -64,7 +59,7 @@ func isValidApi(api string) bool {
 	}
 	return false
 }
-func authorised(r *http.Request) (t bool, ctx context.Context) {
+func isAuth(r *http.Request) (t bool, ctx context.Context) {
 	params := make(map[string]interface{})
 	ctx = context.WithValue(r.Context(), "countryIsoCode", "IN")
 	token := r.Header.Get("Authorization")

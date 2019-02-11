@@ -2,7 +2,7 @@ package auction
 
 import (
 	"encoding/json"
-	"github.com/zopnow/z"
+	"github.com/hplauction/db"
 	"io/ioutil"
 	"net/http"
 )
@@ -10,7 +10,14 @@ import (
 type LoginHandler struct {
 }
 
-func (l LoginHandler) Create(r *http.Request) (interface{}, error) {
+type LoginResponse struct {
+	IsAdmin     bool   `json:"isAdmin,omitempty"`
+	AccessToken string `json:"accessToken"`
+	IsOwner     bool   `json:"isOwner,omitempty"`
+	OwnerId     int    `json:"ownerId,omitempty"`
+}
+
+func (l LoginHandler) Create(r *http.Request) interface{} {
 	var body struct {
 		Username string `json:"username"`
 		Password string `json:"password"`
@@ -18,20 +25,23 @@ func (l LoginHandler) Create(r *http.Request) (interface{}, error) {
 	b, _ := ioutil.ReadAll(r.Body)
 	json.Unmarshal(b, &body)
 	var team Team
-	z.DB.Table("team").Where("username=? and password=?", body.Username, body.Password).First(&team)
+	db.DB.Table("team").Where("username=? and password=?", body.Username, body.Password).First(&team)
 	if team.Id == 0 {
-		return nil, z.Error{Code: http.StatusBadRequest, Message: "invalid username or password"}
+		return Response{Code: 400, Message: "invalid username or password"}
 	}
 	token := createToken(team)
 	team.Token = token
-	z.DB.Table("team").Where("id=?", team.Id).Update(&team)
-	var loginResp struct {
-		IsAdmin     bool   `json:"isAdmin"`
-		AccessToken string `json:"accessToken"`
+	db.DB.Table("team").Where("id=?", team.Id).Update(&team)
+	var data LoginResponse
+	if team.IsAdmin {
+		data.IsAdmin = true
+		data.AccessToken = token
+	} else {
+		data.IsOwner = true
+		data.AccessToken = token
+		data.OwnerId = team.Id
 	}
-	loginResp.IsAdmin = team.IsAdmin
-	loginResp.AccessToken = token
-	return loginResp, nil
+	return Response{Code: 200, Message: "SUCCESS", Data: data}
 }
 
 func createToken(team Team) string {

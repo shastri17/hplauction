@@ -7,4 +7,4 @@ type Response struct {
 	Data    interface{} `json:"data,omitempty"`
 }
 
-var allowedApi = map[string]bool{"team": true, "purse": true, "player": true}
+var allowedApi = map[string]bool{"teams": true, "purse": true, "players": true}

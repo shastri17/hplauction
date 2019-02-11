@@ -1,14 +1,14 @@
 package auction
 
 import (
-	"github.com/zopnow/z"
+	"github.com/hplauction/db"
 	"net/http"
 )
 
 type PurseHandler struct {
 }
 
-func (p PurseHandler) Index(r *http.Request) (interface{}, error) {
+func (p PurseHandler) Index(r *http.Request) interface{} {
 	id := r.Context().Value("id")
 	isAdmin := r.Context().Value("isAdmin")
 	type res struct {
@@ -19,15 +19,15 @@ func (p PurseHandler) Index(r *http.Request) (interface{}, error) {
 	if isAdmin.(bool) {
 		var teams []Team
 		var re []res
-		z.DB.Table("team").Where("id!=?", id).Find(&teams)
+		db.DB.Table("team").Where("id!=?", id).Find(&teams)
 		for _, v := range teams {
 			re = append(re, res{v.PurseAmount, v.MaxBidAmount, v.TeamName})
 		}
-		return re, nil
+		return Response{Code: 200, Data: re}
 	} else {
 		var team Team
-		z.DB.Table("team").Where("id=?", id).First(&team)
-		return res{team.PurseAmount, team.MaxBidAmount, team.TeamName}, nil
+		db.DB.Table("team").Where("id=?", id).First(&team)
+		return Response{Code: 200, Data: res{team.PurseAmount, team.MaxBidAmount, team.TeamName}}
 	}
-	return nil, nil
+	return nil
 }

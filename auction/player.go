@@ -2,7 +2,7 @@ package auction
 
 import (
 	"encoding/json"
-	"github.com/zopnow/z"
+	"github.com/hplauction/db"
 	"io/ioutil"
 	"net/http"
 )
@@ -14,12 +14,12 @@ type PlayerResp struct {
 	Players []Player `json:"players"`
 }
 
-func (p PlayerHandler) Index(r *http.Request) (interface{}, error) {
+func (p PlayerHandler) Index(r *http.Request) interface{} {
 	players := getPlayers()
-	return PlayerResp{players}, nil
+	return Response{Code: 200, Message: "SUCCESS", Data: PlayerResp{players}}
 }
 
-func (p PlayerHandler) Update(r *http.Request) (interface{}, error) {
+func (p PlayerHandler) Update(r *http.Request) interface{} {
 	var body struct {
 		Id            int `json:"id"`
 		BiddingAmount int `json:"bidAmount"`
@@ -29,22 +29,22 @@ func (p PlayerHandler) Update(r *http.Request) (interface{}, error) {
 	json.Unmarshal(b, &body)
 	isAdmin := r.Context().Value("isAdmin").(bool)
 	if !isAdmin {
-		return nil, z.Error{Code: http.StatusBadRequest, Message: "Permission denied"}
+		return Response{Code: 400, Message: "Permission denied"}
 	}
-	z.DB.Exec("update player set bid_amount=?,team_id=?,is_sold=true where id=?", body.BiddingAmount, body.TeamId, body.Id)
+	db.DB.Exec("update player set bid_amount=?,team_id=?,is_sold=true where id=?", body.BiddingAmount, body.TeamId, body.Id)
 	var team Team
-	z.DB.Table("team").Where("id=?", body.TeamId).First(&team)
+	db.DB.Table("team").Where("id=?", body.TeamId).First(&team)
 	team.PurseAmount = team.PurseAmount - body.BiddingAmount
 	team.TotalPlayers = team.TotalPlayers + 1
 	team.MaxBidAmount = team.PurseAmount - ((11 - team.TotalPlayers) * 100)
-	z.DB.Table("team").Where("id=?", body.TeamId).Update(&team)
+	db.DB.Table("team").Where("id=?", body.TeamId).Update(&team)
 	var player Player
-	z.DB.Table("player").Where("id=?", body.Id).First(&player)
-	return p, nil
+	db.DB.Table("player").Where("id=?", body.Id).First(&player)
+	return p
 }
 
 func getPlayers() []Player {
 	var players []Player
-	z.DB.Table("player").Where("is_sold=false").Find(&players)
+	db.DB.Table("player").Where("is_sold=false").Find(&players)
 	return players
 }

@@ -5,6 +5,12 @@ import (
 	"net/http"
 )
 
+type Response struct {
+	Code    int         `json:"code"`
+	Message string      `json:"message"`
+	Data    interface{} `json:"data,omitempty"`
+}
+
 type Team struct {
 	Id           int      `json:"id"`
 	Username     string   `json:"-"`
@@ -35,17 +41,17 @@ type Player struct {
 	Image                 string      `json:"image"`
 	BidAmount             int         `json:"soldAmount"`
 	IsSold                bool        `json:"isSold"`
-	TeamId                int         `json:"teamId"`
+	TeamId                int         `json:"-"`
 }
 
 type RestGet interface {
-	Index(r *http.Request) (interface{}, error)
+	Index(r *http.Request) interface{}
 }
 
 type RestPost interface {
-	Create(r *http.Request) (interface{}, error)
+	Create(r *http.Request) interface{}
 }
 
 type RestPut interface {
-	Update(r *http.Request) (interface{}, error)
+	Update(r *http.Request) interface{}
 }

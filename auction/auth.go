@@ -1,6 +1,6 @@
 package auction
 
-import "github.com/zopnow/z"
+import "github.com/hplauction/db"
 
 type AuthResponse struct {
 	Code    int  `json:"code"`
@@ -17,7 +17,7 @@ func Authorise(params map[string]interface{}) AuthResponse {
 	if token == "" {
 		return AuthResponse{Code: 400}
 	}
-	z.DB.Table("team").Where("token=?", token).First(&team)
+	db.DB.Table("team").Where("token=?", token).First(&team)
 	if team.Id > 0 {
 		return AuthResponse{Code: 200, IsAdmin: team.IsAdmin, UserId: team.Id}
 	}
