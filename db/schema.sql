@@ -33,6 +33,7 @@
     `bid_amount` int(11),
     `is_sold` bool default false,
     `team_id` int default null,
+    `team_name` varchar(100) null ,
     PRIMARY KEY (`id`),
     CONSTRAINT `player_teams` FOREIGN KEY (`team_id`) REFERENCES `team` (`id`)
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

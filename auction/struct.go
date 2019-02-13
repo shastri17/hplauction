@@ -42,6 +42,7 @@ type Player struct {
 	BidAmount             int         `json:"soldAmount"`
 	IsSold                bool        `json:"isSold"`
 	TeamId                int         `json:"-"`
+	TeamName              string      `json:"teamName,omitempty"`
 }
 
 type RestGet interface {
