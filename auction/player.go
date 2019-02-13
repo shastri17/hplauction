@@ -40,11 +40,11 @@ func (p PlayerHandler) Update(r *http.Request) interface{} {
 	db.DB.Table("team").Where("id=?", body.TeamId).Update(&team)
 	var player Player
 	db.DB.Table("player").Where("id=?", body.Id).First(&player)
-	return p
+	return Response{Code: 200, Message: "SUCCESS", Data: player}
 }
 
 func getPlayers() []Player {
 	var players []Player
-	db.DB.Table("player").Where("is_sold=false").Find(&players)
+	db.DB.Table("player").Find(&players)
 	return players
 }
