@@ -1,7 +1,7 @@
 package auction
 
 import (
-	"github.com/hplauction/db"
+	"github.com/shastri17/hplauction/db"
 	"net/http"
 )
 

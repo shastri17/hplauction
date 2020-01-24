@@ -3,7 +3,7 @@ package auction
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/hplauction/db"
+	"github.com/shastri17/hplauction/db"
 	"io/ioutil"
 	"net/http"
 )

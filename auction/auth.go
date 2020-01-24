@@ -1,6 +1,6 @@
 package auction
 
-import "github.com/hplauction/db"
+import "github.com/shastri17/hplauction/db"
 
 type AuthResponse struct {
 	Code    int  `json:"code"`

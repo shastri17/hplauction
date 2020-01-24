@@ -3,7 +3,7 @@ package middle
 import (
 	"context"
 	"encoding/json"
-	"github.com/hplauction/auction"
+	"github.com/shastri17/hplauction/auction"
 	"net/http"
 	"strings"
 )

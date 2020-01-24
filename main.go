@@ -2,9 +2,9 @@ package main
 
 import (
 	"encoding/json"
-	"github.com/hplauction/auction"
-	"github.com/hplauction/db"
-	"github.com/hplauction/middle"
+	"github.com/shastri17/hplauction/auction"
+	"github.com/shastri17/hplauction/db"
+	"github.com/shastri17/hplauction/middle"
 	"log"
 	"net/http"
 	"strings"
