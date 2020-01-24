@@ -9,7 +9,7 @@ import (
 var DB *gorm.DB
 
 func GetMysqlDb() (*gorm.DB, error) {
-	mysqlConn := "root:root123@tcp(localhost:3306)/hpl_auction?charset=utf8&parseTime=True&loc=Local"
+	mysqlConn := "root:Root@123@tcp(localhost:3306)/hpl_auction?charset=utf8&parseTime=True&loc=Local"
 	log.Printf("Connecting MySQL: %v", mysqlConn)
 	var err error
 	DB, err := gorm.Open("mysql", mysqlConn)

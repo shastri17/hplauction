@@ -6,7 +6,7 @@ book = xlrd.open_workbook("players.xls")
 sheet = book.sheet_by_name("HPL-2019")
 
 # Establish a MySQL connection
-database = MySQLdb.connect (host="localhost", user = "root", passwd = "root123", db = "hpl_auction")
+database = MySQLdb.connect (host="localhost", user = "root", passwd = "Root@123", db = "hpl_auction")
 
 # Get the cursor, which is used to traverse the database, line by line
 cursor = database.cursor()

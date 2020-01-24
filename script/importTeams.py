@@ -1,7 +1,7 @@
 import csv
 import MySQLdb
 
-mydb = MySQLdb.connect (host = "localhost",user = "root", passwd = "root123",db = "hpl_auction")
+mydb = MySQLdb.connect (host = "localhost",user = "root", passwd = "Root@123",db = "hpl_auction")
 cursor = mydb.cursor()
 
 csv_data=csv.reader(file("team.csv"))
