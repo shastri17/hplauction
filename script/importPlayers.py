@@ -2,7 +2,7 @@ import xlrd
 import MySQLdb
 
 # Open the workbook and define the worksheet
-book = xlrd.open_workbook("players.xls")
+book = xlrd.open_workbook("players2020.xls")
 sheet = book.sheet_by_name("HPL-2019")
 
 # Establish a MySQL connection
