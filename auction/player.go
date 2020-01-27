@@ -44,9 +44,17 @@ func (p PlayerHandler) Update(r *http.Request) interface{} {
 	var team Team
 	db.DB.Table("team").Where("id=?", body.TeamId).First(&team)
 	team.PurseAmount = team.PurseAmount - body.BiddingAmount
-	team.TotalPlayers = team.TotalPlayers + 1
 	team.MaxBidAmount = team.PurseAmount - ((11 - team.TotalPlayers) * 100)
-	db.DB.Table("team").Where("id=?", body.TeamId).Update(&team)
+	if team.PurseAmount <= team.MaxBidAmount {
+		team.MaxBidAmount = team.PurseAmount
+	}
+
+	if team.PurseAmount <= 0 {
+		team.PurseAmount = 0
+		team.MaxBidAmount = 0
+	}
+	team.TotalPlayers = team.TotalPlayers + 1
+	db.DB.Table("team").Save(&team)
 	player.TeamName = team.TeamName
 	db.DB.Table("player").Where("id=?", body.Id).Update(&player)
 	return Response{Code: 200, Message: "SUCCESS", Data: player}
