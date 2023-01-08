@@ -16,8 +16,12 @@ type PlayerResp struct {
 }
 
 func (p PlayerHandler) Index(r *http.Request) interface{} {
-	players := getPlayers()
+	players := GetPlayers()
 	return Response{Code: 200, Message: "SUCCESS", Data: PlayerResp{players}}
+}
+
+func UpdatePlayer() {
+
 }
 
 func (p PlayerHandler) Update(r *http.Request) interface{} {
@@ -60,7 +64,7 @@ func (p PlayerHandler) Update(r *http.Request) interface{} {
 	return Response{Code: 200, Message: "SUCCESS", Data: player}
 }
 
-func getPlayers() []Player {
+func GetPlayers() []Player {
 	var players []Player
 	db.DB.Table("player").Find(&players)
 	return players

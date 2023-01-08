@@ -2,8 +2,11 @@ package main
 
 import (
 	"encoding/json"
+	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 	"github.com/shastri17/hplauction/auction"
 	"github.com/shastri17/hplauction/db"
+	"github.com/shastri17/hplauction/handler"
 	"github.com/shastri17/hplauction/middle"
 	"log"
 	"net/http"
@@ -48,4 +51,12 @@ func from(api string) interface{} {
 		return hand
 	}
 	return nil
+}
+
+func main() {
+	e := echo.New()
+	e.Use(middleware.Logger())
+	e.Use(middleware.Recover())
+	e.GET("/players", handler.PlayerHandler{}.GetPlayer)
+	e.PUT("/players", handler.PlayerHandler{}.UpdatePlayer)
 }
