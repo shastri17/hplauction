@@ -1,47 +1,32 @@
 package auction
 
 import (
-	"encoding/json"
-	"fmt"
+	"errors"
 	"github.com/shastri17/hplauction/db"
-	"io/ioutil"
-	"net/http"
+	"github.com/shastri17/hplauction/models"
 )
 
 type PlayerHandler struct {
 }
 
 type PlayerResp struct {
-	Players []Player `json:"players"`
+	Players []models.Player `json:"players"`
 }
 
-func (p PlayerHandler) Index(r *http.Request) interface{} {
-	players := getPlayers()
-	return Response{Code: 200, Message: "SUCCESS", Data: PlayerResp{players}}
-}
-
-func (p PlayerHandler) Update(r *http.Request) interface{} {
-	var body struct {
-		Id            int `json:"id"`
-		BiddingAmount int `json:"bidAmount"`
-		TeamId        int `json:"teamId"`
-	}
-	b, _ := ioutil.ReadAll(r.Body)
-	json.Unmarshal(b, &body)
-	isAdmin := r.Context().Value("isAdmin").(bool)
+func UpdatePlayer(body models.PlayerUpdatedRequest, isAdmin bool) (models.Player, error) {
 	if !isAdmin {
-		return Response{Code: 400, Message: "Permission denied"}
+		return models.Player{}, errors.New("not a admin")
 	}
-	var player Player
+	var player models.Player
 	db.DB.Table("player").Where("id=?", body.Id).First(&player)
 	if player.IsSold {
-		return Response{Code: 400, Message: "Player is already sold to " + fmt.Sprint(player.TeamName)}
+		return models.Player{}, errors.New("player already sold")
 	}
 	player.IsSold = true
 	player.TeamId = body.TeamId
 	player.BidAmount = body.BiddingAmount
 
-	var team Team
+	var team models.Team
 	db.DB.Table("team").Where("id=?", body.TeamId).First(&team)
 	team.TotalPlayers = team.TotalPlayers + 1
 	team.PurseAmount = team.PurseAmount - body.BiddingAmount
@@ -57,11 +42,11 @@ func (p PlayerHandler) Update(r *http.Request) interface{} {
 	db.DB.Table("team").Save(&team)
 	player.TeamName = team.TeamName
 	db.DB.Table("player").Where("id=?", body.Id).Update(&player)
-	return Response{Code: 200, Message: "SUCCESS", Data: player}
+	return player, nil
 }
 
-func getPlayers() []Player {
-	var players []Player
+func GetPlayers() []models.Player {
+	var players []models.Player
 	db.DB.Table("player").Find(&players)
 	return players
 }

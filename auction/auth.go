@@ -1,25 +1,18 @@
 package auction
 
-import "github.com/shastri17/hplauction/db"
+import (
+	"github.com/shastri17/hplauction/db"
+	"github.com/shastri17/hplauction/models"
+)
 
-type AuthResponse struct {
-	Code    int  `json:"code"`
-	IsAdmin bool `json:"isOwner"`
-	UserId  int  `json:"userId"`
-}
-
-func Authorise(params map[string]interface{}) AuthResponse {
-	var team Team
-	token := ""
-	if accessToken, ok := params["accessToken"].(string); ok {
-		token = accessToken
-	}
+func Authorise(token string) models.AuthResponse {
+	var team models.Team
 	if token == "" {
-		return AuthResponse{Code: 400}
+		return models.AuthResponse{Code: 400}
 	}
 	db.DB.Table("team").Where("token=?", token).First(&team)
 	if team.Id > 0 {
-		return AuthResponse{Code: 200, IsAdmin: team.IsAdmin, UserId: team.Id}
+		return models.AuthResponse{Code: 200, IsAdmin: team.IsAdmin, UserId: team.Id}
 	}
-	return AuthResponse{Code: 400}
+	return models.AuthResponse{Code: 400}
 }

@@ -1,70 +1,36 @@
 package middle
 
 import (
-	"context"
-	"encoding/json"
+	"errors"
+	"github.com/labstack/echo/v4"
 	"github.com/shastri17/hplauction/auction"
-	"net/http"
 	"strings"
 )
 
-func Authenticator(hand http.Handler) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Access-Control-Allow-Origin", "*")
-		w.Header().Set("Access-Control-Allow-Headers", "Authorization, Content-Type, x-requested-with, origin, X-API-VERSION")
-		w.Header().Set("Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, OPTIONS")
-		w.Header().Set("Content-Type", "application/json")
-		if r.Method == "OPTIONS" {
-			w.WriteHeader(http.StatusOK)
-			return
-		}
-		urlParts := strings.Split(r.URL.Path, "/")
-		apiName := urlParts[1]
-		if r.Method == "POST" || apiName == "login" {
-			res := auction.LoginHandler{}.Create(r)
-			json.NewEncoder(w).Encode(res)
-			return
-		}
-		if !isValidApi(apiName) {
-			w.WriteHeader(404)
-			response := Response{404, "ERROR", "Not Found", nil}
-			json.NewEncoder(w).Encode(response)
-			return
-		}
-		ok, ctx := isAuth(r)
-		if !ok {
-			w.WriteHeader(401)
-			response := Response{401, "ERROR", "Not Authorised", nil}
-			json.NewEncoder(w).Encode(response)
-			return
-		}
-		if ctx != nil {
-			*r = *r.WithContext(ctx)
-		}
-		hand.ServeHTTP(w, r)
-
-	})
+func ServerHeader(next echo.HandlerFunc) echo.HandlerFunc {
+	return func(c echo.Context) error {
+		c.Response().Header().Set("Custom-Header", "blah!!!")
+		c.Response().Header().Set("Access-Control-Allow-Origin", "*")
+		c.Response().Header().Set("Access-Control-Allow-Headers", "Authorization, Content-Type, x-requested-with, origin, X-API-VERSION")
+		c.Response().Header().Set("Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, OPTIONS")
+		c.Response().Header().Set("Content-Type", "application/json")
+		return next(c)
+	}
 }
 
-func isValidApi(api string) bool {
-	if _, ok := allowedApi[api]; ok {
-		return true
+func Auth(next echo.HandlerFunc) echo.HandlerFunc {
+	return func(c echo.Context) error {
+		token := c.Request().Header.Get("Authorization")
+		s := strings.Split(token, " ")
+		if len(s) == 2 {
+			resp := auction.Authorise(s[1])
+			if resp.Code != 200 {
+				return errors.New("not authorised")
+			}
+			c.Set("isAdmin", resp.IsAdmin)
+			c.Set("id", resp.UserId)
+		}
+		return next(c)
 	}
-	return false
-}
-func isAuth(r *http.Request) (t bool, ctx context.Context) {
-	params := make(map[string]interface{})
-	ctx = context.WithValue(r.Context(), "countryIsoCode", "IN")
-	token := r.Header.Get("Authorization")
-	s := strings.Split(token, " ")
-	if len(s) == 2 {
-		params["accessToken"] = s[1]
-	}
-	resp := auction.Authorise(params)
-	ctx = context.WithValue(ctx, "isAdmin", resp.IsAdmin)
-	ctx = context.WithValue(ctx, "id", resp.UserId)
-	if resp.Code == 200 {
-		return true, ctx
-	}
-	return false, ctx
+
 }
