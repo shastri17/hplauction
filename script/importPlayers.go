@@ -10,7 +10,7 @@ import (
 
 func main() {
 	dbo := db.GetMySQLObject()
-	f, err := os.Open("hpl2020players.csv")
+	f, err := os.Open("hpl2023players.csv")
 	if err != nil {
 		log.Fatal("Unable to read input file ", err)
 	}
