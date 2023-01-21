@@ -21,6 +21,7 @@ func Login(body models.LoginRequest) (models.LoginResponse, error) {
 	if team.IsAdmin {
 		data.IsAdmin = true
 		data.AccessToken = token
+		data.OwnerId = team.Id
 	} else {
 		data.IsOwner = true
 		data.AccessToken = token
