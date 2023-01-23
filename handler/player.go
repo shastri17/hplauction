@@ -31,7 +31,7 @@ func (h PlayerHandler) UpdatePlayer(e echo.Context) error {
 	isAdmin := e.Get("isAdmin").(bool)
 	response, err := auction.UpdatePlayer(body, isAdmin)
 	if err != nil {
-		resp.Code = 200
+		resp.Code = 400
 		resp.Data = nil
 		resp.Message = fmt.Sprintln(err)
 		return e.JSON(resp.Code, resp)
