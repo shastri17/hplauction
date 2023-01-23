@@ -72,7 +72,7 @@ func handleRead(oid int) string {
 		ownerId = 1
 	}
 	for {
-		pId := rand.Int() % 198
+		pId := rand.Int() % 197
 		if !m[pId] {
 			pid = pId
 			m[pId] = true
