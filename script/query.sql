@@ -1,0 +1,1 @@
+update team set max_bid_amount=8900, purse_amount=10000 where is_admin=0;
