@@ -64,7 +64,7 @@ func (c *Client) readPump() {
 var pid = 23
 
 func handleRead(oid int) string {
-	if oid == 11 {
+	if oid == 9 {
 		return fmt.Sprintf(`{"ownerId":%v,"number":%v,"isEnabled":%v}`, ownerId, pid, true)
 	}
 	ownerId++
@@ -72,7 +72,7 @@ func handleRead(oid int) string {
 		ownerId = 1
 	}
 	for {
-		pId := rand.Int() % 185
+		pId := rand.Int() % 198
 		if !m[pId] {
 			pid = pId
 			m[pId] = true

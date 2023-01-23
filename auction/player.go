@@ -28,6 +28,9 @@ func UpdatePlayer(body models.PlayerUpdatedRequest, isAdmin bool) (models.Player
 
 	var team models.Team
 	db.DB.Table("team").Where("id=?", body.TeamId).First(&team)
+	if team.MaxBidAmount < body.BiddingAmount && team.TotalPlayers != 12 {
+		return player, errors.New("max bid point reached for " + team.TeamName)
+	}
 	team.TotalPlayers = team.TotalPlayers + 1
 	team.PurseAmount = team.PurseAmount - body.BiddingAmount
 	team.MaxBidAmount = team.PurseAmount - ((11 - team.TotalPlayers) * 100)
