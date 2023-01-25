@@ -71,8 +71,9 @@ func handleRead(oid int) string {
 	if ownerId == 9 {
 		ownerId = 1
 	}
+	rand.Seed(time.Now().UnixNano())
 	for {
-		pId := rand.Int() % 197
+		pId := rand.Int() % 203
 		if !m[pId] {
 			pid = pId
 			m[pId] = true

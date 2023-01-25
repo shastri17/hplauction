@@ -19,6 +19,8 @@ var sendMessage = `{"ownerId":1,"number":23,"isEnabled":false}`
 func init() {
 	m = make(map[int]bool)
 	m[23] = true
+	m[0] = true
+	m[1] = true
 }
 
 func main() {
