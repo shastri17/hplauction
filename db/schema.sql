@@ -36,5 +36,5 @@
     `team_name` varchar(100) null ,
     PRIMARY KEY (`id`),
     CONSTRAINT `player_teams` FOREIGN KEY (`team_id`) REFERENCES `team` (`id`)
-  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT  CHARSET=utf8;
 

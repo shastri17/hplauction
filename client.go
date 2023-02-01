@@ -62,10 +62,11 @@ func (c *Client) readPump() {
 }
 
 var pid = 23
+var totalPlayerDone = 1
 
 func handleRead(oid int) string {
 	if oid == 9 {
-		return fmt.Sprintf(`{"ownerId":%v,"number":%v,"isEnabled":%v}`, ownerId, pid, true)
+		return fmt.Sprintf(`{"ownerId":%v,"number":%v,"isEnabled":%v,"totalPlayersDone":%v}`, ownerId, pid, true, totalPlayerDone)
 	}
 	ownerId++
 	if ownerId == 9 {
@@ -73,14 +74,15 @@ func handleRead(oid int) string {
 	}
 	rand.Seed(time.Now().UnixNano())
 	for {
-		pId := rand.Int() % 203
+		pId := rand.Int() % 201
 		if !m[pId] {
 			pid = pId
 			m[pId] = true
+			totalPlayerDone++
 			break
 		}
 	}
-	return fmt.Sprintf(`{"ownerId":%v,"number":%v,"isEnabled":%v}`, ownerId, pid, false)
+	return fmt.Sprintf(`{"ownerId":%v,"number":%v,"isEnabled":%v,"totalPlayersDone":%v}`, ownerId, pid, false, totalPlayerDone)
 }
 
 func (c *Client) writePump() {
