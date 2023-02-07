@@ -14,7 +14,7 @@ func init() {
 
 var ownerId = 1
 var m map[int]bool
-var sendMessage = `{"ownerId":1,"number":23,"isEnabled":false}`
+var sendMessage = `{"ownerId":1,"number":23,"isEnabled":false,"totalPlayersDone":1}`
 
 func init() {
 	m = make(map[int]bool)
